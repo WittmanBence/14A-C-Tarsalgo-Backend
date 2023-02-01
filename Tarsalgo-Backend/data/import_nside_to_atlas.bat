@@ -1,0 +1,1 @@
+"c:\Program Files\MongoDB\Server\5.0\bin\mongoimport.exe" --uri="mongodb+srv://m001-student:m001-student-password@tarsalgo.eeu6bz8.mongodb.net/Tarsalgo" --collection=nside --drop --file=D:\Ilias_David\Tarsalgo-Backend\data\nside.json --jsonArray
