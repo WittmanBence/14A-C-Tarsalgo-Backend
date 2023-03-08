@@ -9,7 +9,7 @@ import UserNotFoundException from "../exceptions/UserNotFoundException";
 import IdNotValidException from "../exceptions/IdNotValidException";
 import HttpException from "../exceptions/HttpException";
 import userModel from "./user.model";
-import postModel from "../post/post.model";
+import postModel from "../people/people.model";
 import IUser from "./user.interface";
 
 export default class UserController implements IController {
