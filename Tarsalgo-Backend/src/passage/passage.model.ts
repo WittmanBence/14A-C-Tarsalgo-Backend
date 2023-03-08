@@ -17,11 +17,12 @@ const passagesSchema = new Schema<IPassages>(
         },
         FK: {
             type: Number,
+            ref: "people",
         },
     },
     { versionKey: false },
 );
 
-const passagesModel = model<IPassages>("Passages", passagesSchema);
+const passagesModel = model<IPassages>("passages", passagesSchema);
 
 export default passagesModel;
