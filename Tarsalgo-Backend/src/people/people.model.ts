@@ -1,12 +1,11 @@
 import { Schema, model } from "mongoose";
-import { string } from "yargs";
 import IPeople from "./people.interface";
 
 const peopleSchema = new Schema(
     {
         _id: Number,
         name: {
-            type: string,
+            type: String,
             required: true,
         },
     },

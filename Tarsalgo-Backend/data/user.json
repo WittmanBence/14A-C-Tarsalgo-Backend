@@ -1,0 +1,91 @@
+[
+    {
+        "_id": {
+            "$oid": "61b5f0c1f39e4edcf5b8a3d8"
+        },
+
+        "email": "student005@jedlik.eu",
+
+        "auto_login": true,
+        "name": "student005",
+        "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
+        "password": "$2b$10$HBH36EkxhwwOcI7UM/Km3uHUcgwPJjleZYS9fqOgjIr.qmvTUlGPu",
+        "roles": ["admin"]
+    },
+    {
+        "_id": {
+            "$oid": "61b5e9c0f39e4edcf5b8a3b9"
+        },
+
+        "email": "student001@jedlik.eu",
+
+        "auto_login": true,
+        "name": "student001",
+        "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
+        "password": "$2b$10$9Czj8XCCZ6Wg5h9HSngl2eMqAO0Pk/LFmf.LrfeLKDXsBQaI07Pv.",
+        "roles": ["admin"]
+    },
+    {
+        "_id": {
+            "$oid": "61b5f09cf39e4edcf5b8a3d4"
+        },
+
+        "email": "student004@jedlik.eu",
+
+        "auto_login": true,
+        "name": "student004",
+        "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
+        "password": "$2b$10$saCo0rqdGbIiacjcZ60CGuGw8QhA8tgh3gfn0w.LFaVlyPJzd9zA6",
+        "roles": ["admin"]
+    },
+    {
+        "_id": {
+            "$oid": "61b5f048f39e4edcf5b8a3ca"
+        },
+
+        "email": "student003@jedlik.eu",
+
+        "auto_login": true,
+        "name": "student003",
+        "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
+        "password": "$2b$10$WTvhxEncr.YdgIquNpob8OpWqf5hNWEynKNFyQukvmtM/DzRt9ulW",
+        "roles": ["admin"]
+    },
+    {
+        "_id": {
+            "$oid": "61b5ea14f39e4edcf5b8a3bd"
+        },
+
+        "email": "student002@jedlik.eu",
+
+        "auto_login": false,
+        "name": "student002",
+        "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
+        "password": "$2b$10$Rp5avm47rbRHxJxy8sEVueBTLYFAyrVIFiAebUAJDMKlM5raFnwpi",
+        "roles": ["admin"]
+    },
+    {
+        "_id": {
+            "$oid": "635ff64f72eb7a4370228a20"
+        },
+        "email": "nits.laszlo@jedlik.eu",
+
+        "auto_login": true,
+        "name": "László Nits",
+        "picture": "https://lh3.googleusercontent.com/a/ALm5wu1tqlumAaDE2djCuUE2s4ubsOs6HOkdwfU6ftci=s96-c",
+        "password": "stored at Google",
+        "roles": ["admin"]
+    },
+    {
+        "_id": {
+            "$oid": "635ffcff327152b1e52d0380"
+        },
+        "email": "nitslaszlo@gmail.com",
+
+        "auto_login": false,
+        "name": "László Nits",
+        "picture": "https://lh3.googleusercontent.com/a/ALm5wu2jmh9fOUPPn5aOKfXmqhbhvS0kCgdMc-fbMWcm0g=s96-c",
+        "password": "stored at Google",
+        "roles": ["admin"]
+    }
+]
