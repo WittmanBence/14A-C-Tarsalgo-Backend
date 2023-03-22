@@ -1,1 +1,1 @@
-"c:\Program Files\MongoDB\Server\5.0\bin\mongoexport.exe" --uri="mongodb+srv://m001-student:m001-student-password@tarsalgo.eeu6bz8.mongodb.net/Tarsalgo" --collection=nside --out=1side_new.json --jsonArray
+"c:\Program Files\MongoDB\Server\5.0\bin\mongoexport.exe" --uri="mongodb+srv://m001-student:m001-student-password@tarsalgo.eeu6bz8.mongodb.net/Tarsalgo" --collection=people --out=passages_new.json --jsonArray
