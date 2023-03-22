@@ -1,0 +1,842 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "REST API backend - Társalgó",
+        "version": "1.0.0",
+        "description": "<img alt='tarsalgo' height='400px' src='https://github.com/WittmanBence/14A-C-Tarsalgo-Backend/blob/main/Others/Tarsalgo.png' />"
+    },
+    "servers": [
+        {
+            "url": "https://wild-blue-tuna-cuff.cyclic.app"
+        },
+        {
+            "url": "http://localhost:5000"
+        }
+    ],
+    "paths": {
+        "/api/Passages": {
+            "get": {
+                "tags": ["passages"],
+                "summary": "Összes átjárás lekérdezése.",
+                "description": "Az összes átjárás adatát tudjuk lekérdezni.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/passages"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error.message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["passages"],
+                "summary": "Új kategória mentése.",
+                "description": "Új kategória mentése a 'passages' táblában",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/passages"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK (Az új, elmentett kategóriával tér vissza.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passages"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error.message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Passages/{id}": {
+            "get": {
+                "tags": ["passages"],
+                "summary": "Egy átjárás lekérdezése.",
+                "description": "Az id paraméterben megadott átjárás adatait kérdezhetjük le.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Az átjárás azonosítója.",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 2
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passages_populate"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error.message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ezzel az azonosítóval (id) nincs kategória!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["passages"],
+                "summary": "Átjárás módosítása (PATCH).",
+                "description": "A paraméterben megadott átjárás adatait módosítja a végpont.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "A PATCH metódussal módosítandó átjárás azonosítója (PK).",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 3
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/passages"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK (A módosított kategória adatokkal tér vissza.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passages"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott kategória (id) nem létezik."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["passages"],
+                "summary": "Átjárás módosítása (PUT).",
+                "description": "A paraméterben megadott átjárás adatait módosítja a végpont.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "A PUT metódussal módosítandó átjárás azonosítója (PK).",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 3
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/passages"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK (A módosított átjárás adataival tér vissza.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/passages"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott átjárás (id) nem létezik."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["passages"],
+                "summary": "Kategória törlése.",
+                "description": "A paraméterben megadott átjárás törli a végpont.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "A törlendő átjárás azonosítója (PK).",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 99
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK (A átjárás törölve.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "OK"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott átjárás (id) nem létezik."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott (id) átjárásra még hivatkoznak, nem törölhető!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Passages/{offset}/{limit}/{order}/{sort}/{keyword}": {
+            "get": {
+                "tags": ["passages"],
+                "summary": "Paginált adatok lekérése szűréssel.",
+                "description": "Átjárások lekérdezése lapozáshoz, szűréssel.",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "description": "Ennyi rekordot hagyunk el (skip) a lekérdezés 'elejéről'.",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": "5"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "limit",
+                        "description": "Ennyi rekordot küld (take) maximum az API",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": "5"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "order",
+                        "description": "Ez alapján áll fel a sorrend",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "example": "-cim"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "sort",
+                        "description": "Ez alapján áll fel a sorrend",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "example": "-cim"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "keyword",
+                        "description": "Ez alapján tudunk szűrni",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "example": "Dani"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "count": {
+                                            "type": "number",
+                                            "description": "Az összes rekord száma.",
+                                            "example": "16"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "description": "A maximum {limit} számú rekord.",
+                                            "items": {
+                                                "$ref": "#/components/schemas/people"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error.message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Peoples": {
+            "get": {
+                "tags": ["people"],
+                "summary": "Összes ember lekérdezése.",
+                "description": "Az összes ember adatát tudjuk lekérdezni.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/people"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error.message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["people"],
+                "summary": "Új ember mentése.",
+                "description": "Az új ember mentése a 'people' táblában",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/people"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK (Az új, elmentett emberrel tér vissza.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/people"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error.message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Peoples/{id}": {
+            "get": {
+                "tags": ["people"],
+                "summary": "Egy ember lekérdezése.",
+                "description": "Az id paraméterben megadott ember adatait kérdezhetjük le.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Az ember azonosítója.",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 2
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/people_populate"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "error.message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ezzel az azonosítóval (id) nincs ember!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["people"],
+                "summary": "Ember módosítása (PATCH).",
+                "description": "A paraméterben megadott ember adatait módosítja a végpont.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "A PATCH metódussal módosítandó ember azonosítója (PK).",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 3
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/people"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK (A módosított hirdetéssel tér vissza.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/people"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott hirdetés (id) nem létezik."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott (id) emberre még hivatkoznak, nem törölhető!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": ["people"],
+                "summary": "Ember módosítása (PUT).",
+                "description": "A paraméterben megadott ember adatait módosítja a végpont.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "A PUT metódussal módosítandó ember azonosítója (PK).",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 3
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/people"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK (A módosított emberrel tér vissza.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/people"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott ember (id) nem létezik."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["people"],
+                "summary": "Ember törlése.",
+                "description": "A paraméterben megadott ember törli a végpont.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "A törlendő ember azonosítója (PK).",
+                        "in": "path",
+                        "schema": {
+                            "type": "number",
+                            "example": 99
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK (Az ember törölve.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "OK"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A megadott ember (id) nem létezik."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "passages": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "number",
+                        "description": "PK - A átjárás azonosítója.",
+                        "example": 2
+                    },
+                    "FK": {
+                        "type": "number",
+                        "description": "FK - A people azonosítója.",
+                        "example": 3
+                    },
+                    "hour": {
+                        "type": "number",
+                        "description": "A people órája.",
+                        "example": 10
+                    },
+                    "min": {
+                        "type": "number",
+                        "description": "A people perce.",
+                        "example": 55
+                    },
+                    "direction": {
+                        "type": "string",
+                        "description": "A people iránya.",
+                        "example": "be"
+                    }
+                }
+            },
+            "passages_populate": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/passages"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "passages_people": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/people"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "people": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "number",
+                        "description": "PK - A people azonosítója.",
+                        "example": 3
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "A people neve.",
+                        "example": "Dani"
+                    }
+                }
+            },
+            "people_populate": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/people"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "people_passages": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/passages"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
