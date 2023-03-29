@@ -22,7 +22,7 @@ export default class PassageController implements IController {
     }
 
     private initializeRoutes() {
-        this.router.get(this.path, authMiddleware, this.getAllPassages);
+        this.router.get(this.path, this.getAllPassages);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getPassageById);
         this.router.get(`${this.path}/:offset/:limit/:order/:sort/:keyword?`, authMiddleware, this.getPaginatedPassages);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreatePassageDto, true)], this.modifyPassage);
