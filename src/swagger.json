@@ -839,12 +839,6 @@
                         "type": "boolean",
                         "description": "Auto login szolgáltatás jelzése.",
                         "example": true
-                    },
-                    "address": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/address",
-                        "description": "A felhasználó lakcíme.",
-                        "example": true
                     }
                 }
             },
