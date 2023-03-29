@@ -67,7 +67,7 @@
                 }
             }
         },
-        "/api/Passages": {
+        "/Passages": {
             "get": {
                 "tags": ["passages"],
                 "summary": "Összes átjárás lekérdezése.",
@@ -149,7 +149,7 @@
                 }
             }
         },
-        "/api/Passages/{id}": {
+        "/Passages/{id}": {
             "get": {
                 "tags": ["passages"],
                 "summary": "Egy átjárás lekérdezése.",
@@ -387,7 +387,7 @@
                 }
             }
         },
-        "/api/Passages/{offset}/{limit}/{order}/{sort}/{keyword}": {
+        "/Passages/{offset}/{limit}/{order}/{sort}/{keyword}": {
             "get": {
                 "tags": ["passages"],
                 "summary": "Paginált adatok lekérése szűréssel.",
@@ -488,7 +488,7 @@
                 }
             }
         },
-        "/api/Peoples": {
+        "/Peoples": {
             "get": {
                 "tags": ["people"],
                 "summary": "Összes ember lekérdezése.",
@@ -570,7 +570,7 @@
                 }
             }
         },
-        "/api/Peoples/{id}": {
+        "/Peoples/{id}": {
             "get": {
                 "tags": ["people"],
                 "summary": "Egy ember lekérdezése.",
