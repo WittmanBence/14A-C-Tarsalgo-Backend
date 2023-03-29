@@ -67,7 +67,7 @@
                 }
             }
         },
-        "/api/Passages": {
+        "/Passages": {
             "get": {
                 "tags": ["passages"],
                 "summary": "Összes átjárás lekérdezése.",
